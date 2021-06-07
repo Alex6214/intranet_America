@@ -13,6 +13,12 @@ class PrincipalPageAmerica extends StatefulWidget {
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   @override
   Widget build(BuildContext context) {
+    final List<String> pruebas = <String>[
+      'Prueba 1',
+      'Prueba 2',
+      'Prueba 3',
+      'Prueba 4',
+    ];
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -27,21 +33,51 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
         backgroundColor: color,
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Stack(
-            children: [
-              Column(
-                children: [
-                  ListView(
-                    children: [Text('sa')],
-                  )
-                ],
-              )
-            ],
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20), color: color),
+                  height: 40,
+                  width: 100,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20), color: color),
+                  height: 40,
+                  width: 50,
+                  child: Center(child: Text('2')),
+                ),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 50, top: 15),
+              child: Container(
+                height: size.height * 0.7,
+                width: size.width,
+                child: ListView.builder(
+                  itemCount: pruebas.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      color: Colors.white24,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 84),
+                          child: Text(pruebas[index]),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            )
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: color,
@@ -128,9 +164,25 @@ class enddrawerlist extends StatelessWidget {
             //Navigator.pop(context);
           },
         ),
+        Divider(),
+        ListTile(
+          leading: SvgPicture.asset(
+            "assets/icon/capacitacion.svg",
+            height: 25,
+          ),
+          trailing: Icon(Icons.queue_play_next_rounded),
+          title: Text('Cumpleaños'),
+          onTap: () {
+            //_launchCapa();
+            // Update the state of the app
+            // ...
+            // Then close the drawer
+            //Navigator.pop(context);
+          },
+        ),
 
         SizedBox(
-          height: size.height * 0.22,
+          height: size.height * 0.15,
         ),
         Divider(),
         ListTile(
@@ -147,6 +199,7 @@ class enddrawerlist extends StatelessWidget {
             //Navigator.pop(context);
           },
         ),
+
         Divider(),
         //SizedBox(
         //height: size.height * 0.1,

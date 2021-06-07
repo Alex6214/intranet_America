@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intranet_americagit/pages/add/addnotice.dart';
 
 class PrincipalPageAmerica extends StatefulWidget {
   const PrincipalPageAmerica({Key? key}) : super(key: key);
@@ -105,7 +106,13 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
         backgroundColor: color,
         elevation: 30,
         child: Icon(Icons.add_box_outlined),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => AddNotice(),
+              ));
+        },
       ),
     );
   }
@@ -189,10 +196,10 @@ class enddrawerlist extends StatelessWidget {
         Divider(),
         ListTile(
           leading: SvgPicture.asset(
-            "assets/icon/capacitacion.svg",
+            "assets/icon/cake.svg",
             height: 25,
           ),
-          trailing: Icon(Icons.queue_play_next_rounded),
+          trailing: Icon(Icons.people_sharp),
           title: Text('Cumpleaños'),
           onTap: () {
             //_launchCapa();

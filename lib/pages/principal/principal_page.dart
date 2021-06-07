@@ -18,9 +18,14 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
       'Prueba 2',
       'Prueba 3',
       'Prueba 4',
+      'Prueba 5',
     ];
+
+    final tc = '3.85';
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
+    final style = TextStyle(
+        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
     return Scaffold(
       endDrawer: Drawer(
         child: enddrawerlist(size: size),
@@ -45,13 +50,30 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                       borderRadius: BorderRadius.circular(20), color: color),
                   height: 40,
                   width: 100,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'TC: ',
+                        style: style,
+                      ),
+                      Text(
+                        tc,
+                        style: style,
+                      )
+                    ],
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20), color: color),
                   height: 40,
                   width: 50,
-                  child: Center(child: Text('2')),
+                  child: Center(
+                      child: Text(
+                    pruebas.length.toString(),
+                    style: style,
+                  )),
                 ),
               ],
             ),

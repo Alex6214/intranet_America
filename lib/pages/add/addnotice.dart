@@ -71,7 +71,7 @@ class _AddNoticeState extends State<AddNotice> {
                       ),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              primary: Colors.red, // background
+                              primary: Colors.black54, // background
                               onPrimary: Colors.white,
                               textStyle: TextStyle(
                                 fontWeight: FontWeight.bold,

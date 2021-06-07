@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/add/addnotice.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PrincipalPageAmerica extends StatefulWidget {
   const PrincipalPageAmerica({Key? key}) : super(key: key);
@@ -27,6 +28,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
     final size = MediaQuery.of(context).size;
     final style = TextStyle(
         color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+
     return Scaffold(
       endDrawer: Drawer(
         child: enddrawerlist(size: size),
@@ -159,6 +161,7 @@ class enddrawerlist extends StatelessWidget {
           trailing: Icon(Icons.download_rounded),
           title: Text('RIT'),
           onTap: () {
+            _launchURIT();
             // _launchFacebook();
           },
         ),
@@ -245,5 +248,15 @@ class enddrawerlist extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+void _launchURIT() async {
+  const _urlRIT =
+      'https://mega.nz/file/okhEjbYR#_hseQaBq4zFczfqtxYO37kVVY8_-ErB6VidUlOrwy3U';
+  if (await canLaunch(_urlRIT)) {
+    await launch(_urlRIT);
+  } else {
+    throw 'Could not launch $_urlRIT';
   }
 }

@@ -7,7 +7,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
+      debugShowCheckedModeBanner: false,
+      title: 'Intranet America con Git',
       home: SplashAmerica(),
     );
   }

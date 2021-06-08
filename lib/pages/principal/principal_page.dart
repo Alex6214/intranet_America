@@ -13,6 +13,9 @@ class PrincipalPageAmerica extends StatefulWidget {
   _PrincipalPageAmericaState createState() => _PrincipalPageAmericaState();
 }
 
+String codadmin = '';
+final _formKey = GlobalKey<FormState>();
+
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
     ];
 
     final tc = '3.85';
+
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
     final style = TextStyle(
@@ -110,14 +114,60 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
         elevation: 30,
         child: Icon(Icons.add_box_outlined),
         onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => AddNotice(),
-              ));
+          _showAdmin(context);
+          // Navigator.push(
+          //   context,
+          // MaterialPageRoute(
+          // builder: (context) => AddNotice(),
+          // ));
         },
       ),
     );
+  }
+
+  void _showAdmin(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            content: Container(
+              height: 130,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Text('Ingrese Codigo Administrador'),
+                    TextFormField(
+                      validator: (val) =>
+                          val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
+                      onChanged: (val) {
+                        setState(() => codadmin = val);
+                      },
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          // Si el formulario es válido, queremos mostrar un Snackbar
+                          if (codadmin == 'sistemas') {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddNotice(),
+                                ));
+                          }
+                        }
+                      },
+                      child: Text('Administrador'),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
 

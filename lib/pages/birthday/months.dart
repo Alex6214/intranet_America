@@ -44,7 +44,7 @@ class _MounthsState extends State<Mounths> {
               Divider(),
               Container(
                 width: size.width,
-                height: 350,
+                height: 330,
                 child: ListView(
                   children: [
                     GestureDetector(
@@ -173,6 +173,138 @@ class _MounthsState extends State<Mounths> {
                           children: [
                             Text(
                               'Junio',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [Colors.cyanAccent, Colors.white12],
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Julio',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [Colors.cyanAccent, Colors.white12],
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Agosto',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [Colors.cyanAccent, Colors.white12],
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Setiembre',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [Colors.cyanAccent, Colors.white12],
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Octubre',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [Colors.cyanAccent, Colors.white12],
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Noviembre',
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          gradient: LinearGradient(
+                            colors: [Colors.cyanAccent, Colors.white12],
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Diciembre',
                             ),
                           ],
                         ),

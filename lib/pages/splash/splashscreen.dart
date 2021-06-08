@@ -33,6 +33,10 @@ class _SplashAmericaState extends State<SplashAmerica> {
     final color = Color(0xff022d4f);
     return Container(
       decoration: BoxDecoration(color: color),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset('assets/image/Logo.JPG'),
+      ),
     );
   }
 }

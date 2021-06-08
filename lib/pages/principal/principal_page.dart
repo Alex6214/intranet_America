@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/add/addnotice.dart';
+import 'package:intranet_americagit/pages/birthday/months.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PrincipalPageAmerica extends StatefulWidget {
@@ -205,6 +206,10 @@ class enddrawerlist extends StatelessWidget {
           trailing: Icon(Icons.people_sharp),
           title: Text('Cumpleaños'),
           onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Mounths()),
+            );
             //_launchCapa();
             // Update the state of the app
             // ...

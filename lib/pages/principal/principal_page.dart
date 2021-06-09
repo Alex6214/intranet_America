@@ -3,7 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intranet_americagit/pages/add/addnotice.dart';
+import 'package:intranet_americagit/pages/add/addEvent.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -155,7 +155,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AddNotice(),
+                                  builder: (context) => AddEvent('', '', ''),
                                 ));
                           }
                         }

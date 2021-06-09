@@ -51,7 +51,7 @@ class _LoginState extends State<Login> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AddEvent('', '', ''),
+                            builder: (context) => PrincipalPageAmerica(),
                           ));
                     },
                     child: Text('ingresar')),

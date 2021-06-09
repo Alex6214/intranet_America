@@ -29,14 +29,14 @@ class _AddEventState extends State<AddEvent> {
   Widget build(BuildContext context) {
     CollectionReference event = FirebaseFirestore.instance.collection('events');
     Future<void> addEvent() {
-      return event
-          .add({
-            'fecha': myControllerfecha.text,
-            'titulo': myControllertitulo.text,
-            'contenido': myControllercontenido.text,
-          })
-          .then((value) => print("Event Added"))
-          .catchError((error) => print("Failed to add event : $error"));
+      return event.add({
+        'fecha': myControllerfecha.text,
+        'titulo': myControllertitulo.text,
+        'contenido': myControllercontenido.text,
+      }).then((value) {
+        Navigator.pop(context);
+        print("Event Added");
+      }).catchError((error) => print("Failed to add event : $error"));
     }
 
     return Scaffold(

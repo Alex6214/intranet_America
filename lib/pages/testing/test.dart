@@ -1,19 +1,44 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class AddNotice extends StatefulWidget {
-  const AddNotice({Key? key}) : super(key: key);
+class AddEvent extends StatefulWidget {
+  final String fecha;
+  final String titulo;
+  final String contenido;
+  AddEvent(this.fecha, this.titulo, this.contenido);
 
   @override
-  _AddNoticeState createState() => _AddNoticeState();
+  _AddEventState createState() => _AddEventState();
 }
 
-class _AddNoticeState extends State<AddNotice> {
+class _AddEventState extends State<AddEvent> {
+  final myControllerfecha = TextEditingController();
+  final myControllertitulo = TextEditingController();
+  final myControllercontenido = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    myControllerfecha.dispose();
+    myControllertitulo.dispose();
+    myControllercontenido.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final color = Color(0xff022d4f);
-    //final size = MediaQuery.of(context).size;
-    // final style = TextStyle(
-    // color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    CollectionReference event = FirebaseFirestore.instance.collection('events');
+    Future<void> addEvent() {
+      return event
+          .add({
+            'fecha': myControllerfecha.text,
+            'titulo': myControllertitulo.text,
+            'contenido': myControllercontenido.text,
+          })
+          .then((value) => print("Event Added"))
+          .catchError((error) => print("Failed to add event : $error"));
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -21,7 +46,7 @@ class _AddNoticeState extends State<AddNotice> {
           height: 50,
         ),
         centerTitle: true,
-        backgroundColor: color,
+        backgroundColor: Colors.black26,
         automaticallyImplyLeading: false,
         leading: GestureDetector(
           child: Icon(Icons.reply_outlined),
@@ -43,6 +68,7 @@ class _AddNoticeState extends State<AddNotice> {
                   child: Column(
                     children: [
                       TextField(
+                        controller: myControllerfecha,
                         decoration: InputDecoration(
                           icon: Icon(Icons.date_range),
                           labelText: 'Fecha de Evento',
@@ -52,6 +78,7 @@ class _AddNoticeState extends State<AddNotice> {
                         height: 30,
                       ),
                       TextField(
+                        controller: myControllertitulo,
                         decoration: InputDecoration(
                           icon: Icon(Icons.title_outlined),
                           labelText: 'Titulo de Evento',
@@ -61,6 +88,7 @@ class _AddNoticeState extends State<AddNotice> {
                         height: 30,
                       ),
                       TextField(
+                        controller: myControllercontenido,
                         decoration: InputDecoration(
                           icon: Icon(Icons.dehaze_outlined),
                           labelText: 'Detalle de Evento',
@@ -77,7 +105,7 @@ class _AddNoticeState extends State<AddNotice> {
                                 fontWeight: FontWeight.bold,
                               ) // foreground
                               ),
-                          onPressed: () {},
+                          onPressed: addEvent,
                           child: Text(' Agregar ')),
                       Text('')
                     ],
@@ -89,5 +117,10 @@ class _AddNoticeState extends State<AddNotice> {
         ),
       ),
     );
+
+    //ElevatedButton(
+    //onPressed: addEvent,
+    //child: Text('Add Event'),
+    //);
   }
 }

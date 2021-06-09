@@ -13,8 +13,8 @@ class _MounthsState extends State<Mounths> {
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    // final style = TextStyle(
+    // color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: color,

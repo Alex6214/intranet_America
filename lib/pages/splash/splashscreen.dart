@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intranet_americagit/pages/login/loginscrenn.dart';
-import 'package:intranet_americagit/pages/principal/principal_page.dart';
+//import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 class SplashAmerica extends StatefulWidget {
   const SplashAmerica({Key? key}) : super(key: key);
@@ -14,6 +14,7 @@ class SplashAmerica extends StatefulWidget {
 class _SplashAmericaState extends State<SplashAmerica> {
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     Timer(

@@ -1,11 +1,13 @@
+// ignore: unused_import
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/add/addnotice.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
-import 'package:intranet_americagit/pages/login/loginscrenn.dart';
+//import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
+//import 'dart:async';
 
 class PrincipalPageAmerica extends StatefulWidget {
   const PrincipalPageAmerica({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
     return Scaffold(
       endDrawer: Drawer(
-        child: enddrawerlist(size: size),
+        child: Enddrawerlist(size: size),
       ),
       appBar: AppBar(
         title: Image.asset(
@@ -169,8 +171,8 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   }
 }
 
-class enddrawerlist extends StatelessWidget {
-  const enddrawerlist({
+class Enddrawerlist extends StatelessWidget {
+  const Enddrawerlist({
     Key? key,
     required this.size,
   }) : super(key: key);

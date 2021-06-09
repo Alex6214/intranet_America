@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/principal/principal_page.dart';
+import 'package:intranet_americagit/pages/testing/test.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,8 +13,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    const color = const Color(0xff022d4f);
+    //final size = MediaQuery.of(context).size;
+    // const color = const Color(0xff022d4f);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -50,7 +51,7 @@ class _LoginState extends State<Login> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PrincipalPageAmerica(),
+                            builder: (context) => AddEvent('', '', ''),
                           ));
                     },
                     child: Text('ingresar')),

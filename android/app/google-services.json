@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "185756726107",
+    "project_id": "intranetamericacongit",
+    "storage_bucket": "intranetamericacongit.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185756726107:android:d60b20b298382a0fdca07e",
+        "android_client_info": {
+          "package_name": "com.example.intranet_americagit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185756726107-qhetmtu75skhc7ic7gocn3qt240hs1s7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPibs3hyJqNLOeQqhAcFZ5vAwvuGnOjwU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185756726107-qhetmtu75skhc7ic7gocn3qt240hs1s7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

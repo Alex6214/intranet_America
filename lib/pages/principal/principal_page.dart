@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/add/addnotice.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
+import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PrincipalPageAmerica extends StatefulWidget {
@@ -25,6 +26,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
       'Prueba 3',
       'Prueba 4',
       'Prueba 5',
+      'Prueba 6',
     ];
 
     final tc = '3.85';
@@ -115,11 +117,6 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
         child: Icon(Icons.add_box_outlined),
         onPressed: () {
           _showAdmin(context);
-          // Navigator.push(
-          //   context,
-          // MaterialPageRoute(
-          // builder: (context) => AddNotice(),
-          // ));
         },
       ),
     );
@@ -135,6 +132,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
               child: Form(
                 key: _formKey,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Ingrese Codigo Administrador'),
                     TextFormField(

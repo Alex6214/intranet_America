@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
+import 'package:intranet_americagit/pages/testing/testread.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
 //import 'dart:async';
@@ -258,7 +259,7 @@ class Enddrawerlist extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Mounths()),
+              MaterialPageRoute(builder: (context) => EventInformation()),
             );
             //_launchCapa();
             // Update the state of the app

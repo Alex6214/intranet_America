@@ -11,24 +11,41 @@ class _EventInformationState extends State<EventInformation> {
       FirebaseFirestore.instance.collection('events').snapshots();
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: _eventStream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return Text('Something went wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text('Loading');
-          }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Prueba'),
+      ),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: _eventStream,
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Text('Loading');
+            }
 
-          return new ListView(
-            children: snapshot.data!.docs.map((DocumentSnapshot document) {
-              return new ListTile(
-                  // title: new Text(document.data()['fecha']),
-                  // subtitle: new Text(document.data()['titulo']),
-                  );
-            }).toList(),
-          );
-        });
+            return new ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.black26),
+                    child: Column(
+                      children: [
+                        Text(document['titulo']),
+                        Text(document['fecha']),
+                      ],
+                    ),
+                  ),
+                );
+                //Text(document.data().toString());
+              }).toList(),
+            );
+          }),
+    );
   }
 }

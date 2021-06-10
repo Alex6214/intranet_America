@@ -1,9 +1,11 @@
 // ignore: unused_import
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
+// ignore: unused_import
 import 'package:intranet_americagit/pages/birthday/months.dart';
 import 'package:intranet_americagit/pages/testing/testread.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
@@ -21,6 +23,8 @@ String codadmin = '';
 final _formKey = GlobalKey<FormState>();
 
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
+  final Stream<QuerySnapshot> _eventStream =
+      FirebaseFirestore.instance.collection('events').snapshots();
   @override
   Widget build(BuildContext context) {
     final List<String> pruebas = <String>[
@@ -51,69 +55,52 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
         backgroundColor: color,
         automaticallyImplyLeading: false,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: color),
-                  height: 40,
-                  width: 100,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'TC: ',
-                        style: style,
-                      ),
-                      Text(
-                        tc,
-                        style: style,
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: color),
-                  height: 40,
-                  width: 50,
-                  child: Center(
-                      child: Text(
-                    pruebas.length.toString(),
-                    style: style,
-                  )),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 50, top: 15),
-              child: Container(
-                height: size.height * 0.7,
-                width: size.width,
-                child: ListView.builder(
-                  itemCount: pruebas.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      color: Colors.white24,
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 84),
-                          child: Text(pruebas[index]),
+      body: StreamBuilder<QuerySnapshot>(
+          stream: _eventStream,
+          builder:
+              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (snapshot.hasError) {
+              return Text('Something went wrong');
+            }
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            return new ListView(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                return Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    width: size.width,
+                    height: 200,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.black26),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 50, left: 50),
+                          child: Row(
+                            children: [
+                              Text(document['titulo']),
+                              Spacer(),
+                              Text(document['fecha']),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            )
-          ],
-        ),
-      ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
+                          child: Text(document['contenido']),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+                //Text(document.data().toString());
+              }).toList(),
+            );
+          }),
       floatingActionButton: FloatingActionButton(
         backgroundColor: color,
         elevation: 30,
@@ -259,7 +246,7 @@ class Enddrawerlist extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => EventInformation()),
+              MaterialPageRoute(builder: (context) => Mounths()),
             );
             //_launchCapa();
             // Update the state of the app

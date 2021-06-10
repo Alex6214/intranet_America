@@ -18,6 +18,7 @@ class _AddEventState extends State<AddEvent> {
 
   @override
   void dispose() {
+    // ignore: todo
     // TODO: implement dispose
     myControllerfecha.dispose();
     myControllertitulo.dispose();
@@ -36,6 +37,7 @@ class _AddEventState extends State<AddEvent> {
       }).then((value) {
         Navigator.pop(context);
         print("Event Added");
+        // ignore: invalid_return_type_for_catch_error
       }).catchError((error) => print("Failed to add event : $error"));
     }
 

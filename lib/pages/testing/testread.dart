@@ -23,7 +23,7 @@ class _EventInformationState extends State<EventInformation> {
               return Text('Something went wrong');
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text('Loading');
+              return Center(child: CircularProgressIndicator());
             }
 
             return new ListView(

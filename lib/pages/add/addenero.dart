@@ -1,45 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intranet_americagit/pages/principal/principal_page.dart';
+import 'package:intranet_americagit/pages/birthday/enero/enero.dart';
 
-class AddEvent extends StatefulWidget {
+class AddEnero extends StatefulWidget {
+  final String sede;
   final String fecha;
-  final String titulo;
-  final String contenido;
-  AddEvent(this.fecha, this.titulo, this.contenido);
+  final String nombres;
+
+  AddEnero(this.sede, this.fecha, this.nombres);
 
   @override
-  _AddEventState createState() => _AddEventState();
+  _AddEneroState createState() => _AddEneroState();
 }
 
-class _AddEventState extends State<AddEvent> {
+class _AddEneroState extends State<AddEnero> {
   final myControllerfecha = TextEditingController();
-  final myControllertitulo = TextEditingController();
-  final myControllercontenido = TextEditingController();
+  final myControllersede = TextEditingController();
+  final myControllernombres = TextEditingController();
 
   @override
   void dispose() {
     // ignore: todo
     // TODO: implement dispose
     myControllerfecha.dispose();
-    myControllertitulo.dispose();
-    myControllercontenido.dispose();
+    myControllersede.dispose();
+    myControllernombres.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference event = FirebaseFirestore.instance.collection('events');
-    Future<void> addEvent() {
+    CollectionReference event = FirebaseFirestore.instance.collection('enero');
+    Future<void> addEnero() {
       return event.add({
         'fecha': myControllerfecha.text,
-        'titulo': myControllertitulo.text,
-        'contenido': myControllercontenido.text,
+        'sede': myControllersede.text,
+        'nombres': myControllernombres.text,
       }).then((value) {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => PrincipalPageAmerica(),
+              builder: (context) => Enero(),
             ));
         print("Event Added");
         // ignore: invalid_return_type_for_catch_error
@@ -85,20 +86,20 @@ class _AddEventState extends State<AddEvent> {
                         height: 30,
                       ),
                       TextField(
-                        controller: myControllertitulo,
+                        controller: myControllersede,
                         decoration: InputDecoration(
                           icon: Icon(Icons.title_outlined),
-                          labelText: 'Titulo de Evento',
+                          labelText: 'Sede',
                         ),
                       ),
                       Divider(
                         height: 30,
                       ),
                       TextField(
-                        controller: myControllercontenido,
+                        controller: myControllernombres,
                         decoration: InputDecoration(
                           icon: Icon(Icons.dehaze_outlined),
-                          labelText: 'Detalle de Evento',
+                          labelText: 'Nombres del Trabajados',
                         ),
                       ),
                       Divider(
@@ -112,7 +113,7 @@ class _AddEventState extends State<AddEvent> {
                                 fontWeight: FontWeight.bold,
                               ) // foreground
                               ),
-                          onPressed: addEvent,
+                          onPressed: addEnero,
                           child: Text(' Agregar ')),
                       Text('')
                     ],
@@ -124,10 +125,5 @@ class _AddEventState extends State<AddEvent> {
         ),
       ),
     );
-
-    //ElevatedButton(
-    //onPressed: addEvent,
-    //child: Text('Add Event'),
-    //);
   }
 }

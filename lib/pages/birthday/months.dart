@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intranet_americagit/pages/birthday/enero/enero.dart';
+import 'package:intranet_americagit/pages/birthday/febrero/febrero.dart';
 
 class Mounths extends StatefulWidget {
   const Mounths({Key? key}) : super(key: key);
@@ -48,7 +50,14 @@ class _MounthsState extends State<Mounths> {
                 child: ListView(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Enero(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -70,7 +79,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Febrero(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,

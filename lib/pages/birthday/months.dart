@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intranet_americagit/pages/birthday/abril/abril.dart';
+import 'package:intranet_americagit/pages/birthday/agosto/agosto.dart';
+import 'package:intranet_americagit/pages/birthday/diciembre/diciembre.dart';
 import 'package:intranet_americagit/pages/birthday/enero/enero.dart';
 import 'package:intranet_americagit/pages/birthday/febrero/febrero.dart';
+import 'package:intranet_americagit/pages/birthday/julio/julio.dart';
+import 'package:intranet_americagit/pages/birthday/junio/junio.dart';
+import 'package:intranet_americagit/pages/birthday/marzo/marzo.dart';
+import 'package:intranet_americagit/pages/birthday/mayo/mayo.dart';
+import 'package:intranet_americagit/pages/birthday/noviembre/noviembre.dart';
+import 'package:intranet_americagit/pages/birthday/octubre/octubre.dart';
+import 'package:intranet_americagit/pages/birthday/setiembre/setiembre.dart';
 
 class Mounths extends StatefulWidget {
   const Mounths({Key? key}) : super(key: key);
@@ -108,7 +118,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Marzo(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -130,7 +147,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Abril(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -152,7 +176,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Mayo(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -174,7 +205,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Junio(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -196,7 +234,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Julio(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -218,7 +263,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Agosto(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -240,7 +292,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Setiembre(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -262,7 +321,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Octubre(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -284,7 +350,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Noviembre(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,
@@ -306,7 +379,14 @@ class _MounthsState extends State<Mounths> {
                     ),
                     Divider(),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Diciembre(),
+                          ),
+                        );
+                      },
                       child: Container(
                         height: 100,
                         width: 100,

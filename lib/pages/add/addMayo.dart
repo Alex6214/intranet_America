@@ -80,7 +80,7 @@ class _AddMayoState extends State<AddMayo> {
                         controller: myControllerfecha,
                         decoration: InputDecoration(
                           icon: Icon(Icons.date_range),
-                          labelText: 'Fecha de Evento',
+                          labelText: 'Fecha de Cumpleaños',
                         ),
                       ),
                       Divider(
@@ -100,7 +100,7 @@ class _AddMayoState extends State<AddMayo> {
                         controller: myControllernombres,
                         decoration: InputDecoration(
                           icon: Icon(Icons.dehaze_outlined),
-                          labelText: 'Nombres del Trabajados',
+                          labelText: 'Nombres del Trabajador',
                         ),
                       ),
                       Divider(

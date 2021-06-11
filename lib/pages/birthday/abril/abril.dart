@@ -113,6 +113,7 @@ class _AbrilState extends State<Abril> {
                   children: [
                     Text('Ingrese Codigo Administrador'),
                     TextFormField(
+                      obscureText: true,
                       validator: (val) =>
                           val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
                       onChanged: (val) {

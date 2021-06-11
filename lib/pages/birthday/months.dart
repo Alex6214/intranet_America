@@ -12,6 +12,7 @@ import 'package:intranet_americagit/pages/birthday/mayo/mayo.dart';
 import 'package:intranet_americagit/pages/birthday/noviembre/noviembre.dart';
 import 'package:intranet_americagit/pages/birthday/octubre/octubre.dart';
 import 'package:intranet_americagit/pages/birthday/setiembre/setiembre.dart';
+import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 class Mounths extends StatefulWidget {
   const Mounths({Key? key}) : super(key: key);
@@ -35,6 +36,16 @@ class _MounthsState extends State<Mounths> {
           height: 55,
         ),
         centerTitle: true,
+        leading: GestureDetector(
+          child: Icon(Icons.reply_outlined),
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PrincipalPageAmerica(),
+                ));
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

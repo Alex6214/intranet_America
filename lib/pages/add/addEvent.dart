@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 class AddEvent extends StatefulWidget {
   final String fecha;
@@ -35,7 +36,11 @@ class _AddEventState extends State<AddEvent> {
         'titulo': myControllertitulo.text,
         'contenido': myControllercontenido.text,
       }).then((value) {
-        Navigator.pop(context);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PrincipalPageAmerica(),
+            ));
         print("Event Added");
         // ignore: invalid_return_type_for_catch_error
       }).catchError((error) => print("Failed to add event : $error"));

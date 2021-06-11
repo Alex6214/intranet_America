@@ -139,7 +139,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           // Si el formulario es válido, queremos mostrar un Snackbar
-                          if (codadmin == 'sistemas') {
+                          if (codadmin == 'sistemas6214') {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

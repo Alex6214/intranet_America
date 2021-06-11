@@ -1,22 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intranet_americagit/pages/add/addenero.dart';
+import 'package:intranet_americagit/pages/add/addSetiembre.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 
-class Enero extends StatefulWidget {
-  const Enero({Key? key}) : super(key: key);
+class Setiembre extends StatefulWidget {
+  const Setiembre({Key? key}) : super(key: key);
 
   @override
-  _EneroState createState() => _EneroState();
+  _SetiembreState createState() => _SetiembreState();
 }
 
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
 
-class _EneroState extends State<Enero> {
+class _SetiembreState extends State<Setiembre> {
   final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('enero').snapshots();
-
+      FirebaseFirestore.instance.collection('setiembre').snapshots();
   @override
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
@@ -132,7 +131,8 @@ class _EneroState extends State<Enero> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AddEnero('', '', ''),
+                                  builder: (context) =>
+                                      AddSetiembre('', '', ''),
                                 ));
                           }
                         }

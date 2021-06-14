@@ -1,17 +1,39 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:intranet_americagit/logic/services_firebase.dart';
 import 'package:intranet_americagit/pages/principal/principal_page.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/testing/testadd.dart';
+import 'package:intranet_americagit/pages/testing/testauth.dart';
 
 class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
-
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
+  final myControlleremail = TextEditingController();
+  final myControllerpassword = TextEditingController();
+
+  final AuthService _authCredential = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool _showPassword = false;
+
+  String email = '';
+  String pass = '';
+  String error = '';
+
+  @override
+  void dispose() {
+    // ignore: todo
+    // TODO: implement dispose
+    myControlleremail.dispose();
+    myControllerpassword.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     //final size = MediaQuery.of(context).size;
@@ -33,29 +55,64 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: const EdgeInsets.all(40.0),
                 child: Form(
+                    key: _formKey,
                     child: Column(
-                  children: [
-                    TextFormField(
-                      decoration:
-                          InputDecoration(hintText: 'Correo electronico'),
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(hintText: 'Contraseña'),
-                    )
-                  ],
-                )),
+                      children: [
+                        TextFormField(
+                          decoration:
+                              InputDecoration(hintText: 'Correo electronico'),
+                          validator: (val) =>
+                              val!.isEmpty ? 'Ingresa un correo' : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                              hintText: 'Contraseña',
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _showPassword = !_showPassword;
+                                  });
+                                },
+                                child: Icon(_showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                              )),
+                          obscureText: !_showPassword,
+                          validator: (val) => val!.length < 6
+                              ? 'Password muy corto debe ser de 6+ caracteres'
+                              : null,
+                          onChanged: (val) {
+                            setState(() => pass = val);
+                          },
+                        )
+                      ],
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PrincipalPageAmerica(),
-                          ));
-                    },
-                    child: Text('ingresar')),
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      bool succes = await _authCredential
+                          .signInUserWithEmailAndPassword(email, pass);
+                      if (!succes) {
+                        setState(() {
+                          error = 'Sucedio un error';
+                        });
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PrincipalPageAmerica(),
+                            ));
+                      }
+                    }
+                  },
+                  child: Text('ingresar'),
+                ),
               ),
             ],
           ),

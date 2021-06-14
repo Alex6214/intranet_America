@@ -12,6 +12,7 @@ class Noviembre extends StatefulWidget {
 
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
+bool _showPassword = false;
 
 class _NoviembreState extends State<Noviembre> {
   final Stream<QuerySnapshot> _eventStream =
@@ -113,7 +114,19 @@ class _NoviembreState extends State<Noviembre> {
                   children: [
                     Text('Ingrese Codigo Administrador'),
                     TextFormField(
-                      obscureText: true,
+                      decoration: InputDecoration(
+                          hintText: 'Codigo',
+                          suffixIcon: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _showPassword = !_showPassword;
+                              });
+                            },
+                            child: Icon(_showPassword
+                                ? Icons.visibility
+                                : Icons.visibility_off),
+                          )),
+                      obscureText: !_showPassword,
                       validator: (val) =>
                           val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
                       onChanged: (val) {

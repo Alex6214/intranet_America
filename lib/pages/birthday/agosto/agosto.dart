@@ -12,6 +12,7 @@ class Agosto extends StatefulWidget {
 
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
+bool _showPassword = false;
 
 class _AgostoState extends State<Agosto> {
   final Stream<QuerySnapshot> _eventStream =

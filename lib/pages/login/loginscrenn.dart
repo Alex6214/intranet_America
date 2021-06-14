@@ -18,6 +18,7 @@ class _LoginState extends State<Login> {
 
   final AuthService _authCredential = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool _showPassword = false;
 
   String email = '';
   String pass = '';
@@ -67,8 +68,19 @@ class _LoginState extends State<Login> {
                           },
                         ),
                         TextFormField(
-                          decoration: InputDecoration(hintText: 'Contraseña'),
-                          obscureText: true,
+                          decoration: InputDecoration(
+                              hintText: 'Contraseña',
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _showPassword = !_showPassword;
+                                  });
+                                },
+                                child: Icon(_showPassword
+                                    ? Icons.visibility
+                                    : Icons.visibility_off),
+                              )),
+                          obscureText: !_showPassword,
                           validator: (val) => val!.length < 6
                               ? 'Password muy corto debe ser de 6+ caracteres'
                               : null,

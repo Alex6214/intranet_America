@@ -1,47 +1,32 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
-class AddEvent extends StatefulWidget {
-  final String fecha;
-  final String titulo;
-  final String contenido;
-  AddEvent(this.fecha, this.titulo, this.contenido);
+FirebaseAuth auth = FirebaseAuth.instance;
 
+class CreateUser extends StatefulWidget {
   @override
-  _AddEventState createState() => _AddEventState();
+  _CreateUserState createState() => _CreateUserState();
 }
 
-class _AddEventState extends State<AddEvent> {
-  final myControllerfecha = TextEditingController();
-  final myControllertitulo = TextEditingController();
-  final myControllercontenido = TextEditingController();
+class _CreateUserState extends State<CreateUser> {
+  final myControlleremail = TextEditingController();
+  final myControllerpassword = TextEditingController();
 
   @override
   void dispose() {
     // ignore: todo
     // TODO: implement dispose
-    myControllerfecha.dispose();
-    myControllertitulo.dispose();
-    myControllercontenido.dispose();
+    myControlleremail.dispose();
+    myControllerpassword.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    CollectionReference event = FirebaseFirestore.instance.collection('events');
-    Future<void> addEvent() {
-      return event.add({
-        'fecha': myControllerfecha.text,
-        'titulo': myControllertitulo.text,
-        'contenido': myControllercontenido.text,
-      }).then((value) {
-        Navigator.pop(context);
-        print("Event Added");
-        // ignore: invalid_return_type_for_catch_error
-      }).catchError((error) => print("Failed to add event : $error"));
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -71,31 +56,24 @@ class _AddEventState extends State<AddEvent> {
                   child: Column(
                     children: [
                       TextField(
-                        controller: myControllerfecha,
+                        controller: myControlleremail,
                         decoration: InputDecoration(
                           icon: Icon(Icons.date_range),
-                          labelText: 'Fecha de Evento',
+                          labelText: 'Email',
                         ),
                       ),
                       Divider(
                         height: 30,
                       ),
                       TextField(
-                        controller: myControllertitulo,
+                        controller: myControllerpassword,
                         decoration: InputDecoration(
                           icon: Icon(Icons.title_outlined),
-                          labelText: 'Titulo de Evento',
+                          labelText: 'Password',
                         ),
                       ),
                       Divider(
                         height: 30,
-                      ),
-                      TextField(
-                        controller: myControllercontenido,
-                        decoration: InputDecoration(
-                          icon: Icon(Icons.dehaze_outlined),
-                          labelText: 'Detalle de Evento',
-                        ),
                       ),
                       Divider(
                         height: 30,
@@ -108,8 +86,8 @@ class _AddEventState extends State<AddEvent> {
                                 fontWeight: FontWeight.bold,
                               ) // foreground
                               ),
-                          onPressed: addEvent,
-                          child: Text(' Agregar ')),
+                          onPressed: () {},
+                          child: Text(' Crear User ')),
                       Text('')
                     ],
                   ),
@@ -120,10 +98,5 @@ class _AddEventState extends State<AddEvent> {
         ),
       ),
     );
-
-    //ElevatedButton(
-    //onPressed: addEvent,
-    //child: Text('Add Event'),
-    //);
   }
 }

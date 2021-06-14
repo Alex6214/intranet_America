@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/logic/services_firebase.dart';
 import 'package:intranet_americagit/pages/principal/principal_page.dart';
 // ignore: unused_import
@@ -36,6 +37,13 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    final styleTitule = GoogleFonts.poppins(
+        fontSize: 26.0, color: Colors.black, fontWeight: FontWeight.bold);
+    final styletext = GoogleFonts.poppins(
+        fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styleForm = GoogleFonts.poppins(
+        fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold);
     //final size = MediaQuery.of(context).size;
     // const color = const Color(0xff022d4f);
     return Scaffold(
@@ -51,7 +59,10 @@ class _LoginState extends State<Login> {
                   height: 280,
                 ),
               ),
-              Text('Bienvenido'),
+              Text(
+                'Bienvenido',
+                style: styleTitule,
+              ),
               Padding(
                 padding: const EdgeInsets.all(40.0),
                 child: Form(

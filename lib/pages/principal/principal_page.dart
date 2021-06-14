@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/birthday/months.dart';
@@ -41,8 +42,8 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    final style = GoogleFonts.poppins(
+        fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
 
     return Scaffold(
       endDrawer: Drawer(

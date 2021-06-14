@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:intranet_americagit/pages/login/loginscrenn.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 class SplashAmerica extends StatefulWidget {
@@ -37,7 +39,9 @@ class _SplashAmericaState extends State<SplashAmerica> {
       decoration: BoxDecoration(color: color),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset('assets/image/Logo.JPG'),
+        child: ZoomIn(
+            duration: Duration(seconds: 1),
+            child: Image.asset('assets/image/Logo.JPG')),
       ),
     );
   }

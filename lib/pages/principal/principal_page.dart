@@ -4,12 +4,14 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/birthday/months.dart';
 import 'package:intranet_americagit/pages/testing/testread.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:animate_do/animate_do.dart';
 //import 'dart:async';
 
 class PrincipalPageAmerica extends StatefulWidget {
@@ -41,8 +43,8 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    final style = GoogleFonts.poppins(
+        fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
 
     return Scaffold(
       endDrawer: Drawer(
@@ -71,30 +73,32 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Container(
-                    width: size.width,
-                    height: 200,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Colors.black26),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 50, left: 50),
-                          child: Row(
-                            children: [
-                              Text(document['titulo']),
-                              Spacer(),
-                              Text(document['fecha']),
-                            ],
+                  child: ZoomIn(
+                    child: Container(
+                      width: size.width,
+                      height: 200,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.black26),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 50, left: 50),
+                            child: Row(
+                              children: [
+                                Text(document['titulo']),
+                                Spacer(),
+                                Text(document['fecha']),
+                              ],
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          child: Text(document['contenido']),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: Text(document['contenido']),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -117,54 +121,57 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
-            content: Container(
-              height: 130,
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Ingrese Codigo Administrador'),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          hintText: 'Codigo',
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                _showPassword = !_showPassword;
-                              });
-                            },
-                            child: Icon(_showPassword
-                                ? Icons.visibility
-                                : Icons.visibility_off),
-                          )),
-                      obscureText: !_showPassword,
-                      validator: (val) =>
-                          val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
-                      onChanged: (val) {
-                        setState(() => codadmin = val);
-                      },
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Si el formulario es válido, queremos mostrar un Snackbar
-                          if (codadmin == 'sistemas6214') {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => AddEvent('', '', ''),
-                                ));
+          return BounceInDown(
+            duration: Duration(seconds: 2),
+            child: AlertDialog(
+              content: Container(
+                height: 130,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Ingrese Codigo Administrador'),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            hintText: 'Codigo',
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _showPassword = !_showPassword;
+                                });
+                              },
+                              child: Icon(_showPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            )),
+                        obscureText: !_showPassword,
+                        validator: (val) =>
+                            val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
+                        onChanged: (val) {
+                          setState(() => codadmin = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Si el formulario es válido, queremos mostrar un Snackbar
+                            if (codadmin == 'sistemas6214') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => AddEvent('', '', ''),
+                                  ));
+                            }
                           }
-                        }
-                      },
-                      child: Text('Administrador'),
-                    )
-                  ],
+                        },
+                        child: Text('Administrador'),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

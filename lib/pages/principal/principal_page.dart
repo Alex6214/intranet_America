@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/logic/services_firebase.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
 // ignore: unused_import
@@ -25,6 +26,8 @@ final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 final AuthService _authService = AuthService();
 
+bool _visibility = false;
+
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   final Stream<QuerySnapshot> _eventStream =
       FirebaseFirestore.instance.collection('events').snapshots();
@@ -43,6 +46,11 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
+    final style = GoogleFonts.poppins(
+        fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styletextname = GoogleFonts.poppins(
+        fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold);
     //final style = GoogleFonts.poppins(
     // fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
 
@@ -76,7 +84,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                   child: ZoomIn(
                     child: Container(
                       width: size.width,
-                      height: 200,
+                      height: 250,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.black26),
@@ -87,16 +95,65 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(document['titulo']),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.title,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['titulo'],
+                                      style: style,
+                                    ),
+                                  ],
+                                ),
                                 Spacer(),
-                                Text(document['fecha']),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.event_available,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['fecha'],
+                                      style: style,
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['contenido']),
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.text_snippet,
+                                  color: color,
+                                ),
+                                Text(
+                                  document['contenido'],
+                                  style: styletextname,
+                                ),
+                              ],
+                            ),
                           ),
+                          GestureDetector(
+                              onTap: () async {
+                                final _urlLink = document['link'];
+                                if (await _urlLink == '') {
+                                  setState(() {
+                                    _visibility = !_visibility;
+                                  });
+                                } else if (await canLaunch(_urlLink)) {
+                                  await launch(_urlLink);
+                                } else {
+                                  throw 'Could not launch $_urlLink';
+                                }
+                              },
+                              child: Visibility(
+                                  visible: _visibility,
+                                  child: Icon(Icons.link)))
                         ],
                       ),
                     ),
@@ -319,6 +376,15 @@ class Enddrawerlist extends StatelessWidget {
 void _launchURIT() async {
   const _urlRIT =
       'https://mega.nz/file/okhEjbYR#_hseQaBq4zFczfqtxYO37kVVY8_-ErB6VidUlOrwy3U';
+  if (await canLaunch(_urlRIT)) {
+    await launch(_urlRIT);
+  } else {
+    throw 'Could not launch $_urlRIT';
+  }
+}
+
+void _launchCapas() async {
+  const _urlRIT = 'https://mega.nz/folder/49hC3ZTS#L5gJQL2s4ph7-Nkpe8mhNg';
   if (await canLaunch(_urlRIT)) {
     await launch(_urlRIT);
   } else {

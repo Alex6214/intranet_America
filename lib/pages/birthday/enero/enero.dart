@@ -25,7 +25,10 @@ class _EneroState extends State<Enero> {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
     final style = GoogleFonts.poppins(
-        fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold);
+        fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styletextname = GoogleFonts.poppins(
+        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -76,22 +79,47 @@ class _EneroState extends State<Enero> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(
-                                  document['sede'],
-                                  style: style,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.date_range_outlined,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['fecha'],
+                                      style: style,
+                                    ),
+                                  ],
                                 ),
                                 Spacer(),
-                                Text(
-                                  document['fecha'],
-                                  style: style,
-                                ),
-                                Spacer(),
-                                Text(
-                                  document['nombres'],
-                                  style: style,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.local_convenience_store_rounded,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['sede'],
+                                      style: style,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                          Column(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                color: color,
+                              ),
+                              Text(
+                                document['nombres'],
+                                style: styletextname,
+                              ),
+                            ],
                           ),
                         ],
                       ),

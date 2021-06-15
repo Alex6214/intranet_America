@@ -132,7 +132,7 @@ class _LoginState extends State<Login> {
                               }
                             },
                             child: Text(
-                              'ingresar',
+                              'Ingresar',
                               style: styletext,
                             ),
                           ),

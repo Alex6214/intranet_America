@@ -102,6 +102,16 @@ class _AddEventState extends State<AddEvent> {
                       Divider(
                         height: 30,
                       ),
+                      TextField(
+                        controller: myControllerlink,
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.dehaze_outlined),
+                          labelText: 'Link de Evento',
+                        ),
+                      ),
+                      Divider(
+                        height: 30,
+                      ),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               primary: Colors.black54, // background

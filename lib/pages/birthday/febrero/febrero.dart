@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/add/addFebrero.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 
@@ -23,8 +24,11 @@ class _FebreroState extends State<Febrero> {
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    final style = GoogleFonts.poppins(
+        fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styletextname = GoogleFonts.poppins(
+        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -75,22 +79,47 @@ class _FebreroState extends State<Febrero> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(
-                                  document['sede'],
-                                  style: style,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.date_range_outlined,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['fecha'],
+                                      style: style,
+                                    ),
+                                  ],
                                 ),
                                 Spacer(),
-                                Text(
-                                  document['fecha'],
-                                  style: style,
-                                ),
-                                Spacer(),
-                                Text(
-                                  document['nombres'],
-                                  style: style,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.local_convenience_store_rounded,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['sede'],
+                                      style: style,
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                          Column(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                color: color,
+                              ),
+                              Text(
+                                document['nombres'],
+                                style: styletextname,
+                              ),
+                            ],
                           ),
                         ],
                       ),

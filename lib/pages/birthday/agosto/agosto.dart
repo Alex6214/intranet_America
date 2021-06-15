@@ -69,63 +69,67 @@ class _AgostoState extends State<Agosto> {
                     duration: Duration(seconds: 2),
                     child: Container(
                       width: size.width,
-                      height: 100,
+                      height: 150,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         gradient: LinearGradient(
                           colors: [Colors.black38, Colors.white12],
                         ),
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50, left: 50),
-                            child: Row(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 50, left: 50),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.date_range_outlined,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['fecha'],
+                                        style: style,
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.local_convenience_store_rounded,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['sede'],
+                                        style: style,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
                               children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.date_range_outlined,
-                                      color: color,
-                                    ),
-                                    Text(
-                                      document['fecha'],
-                                      style: style,
-                                    ),
-                                  ],
+                                Icon(
+                                  Icons.person,
+                                  color: color,
                                 ),
-                                Spacer(),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.local_convenience_store_rounded,
-                                      color: color,
-                                    ),
-                                    Text(
-                                      document['sede'],
-                                      style: style,
-                                    ),
-                                  ],
+                                Text(
+                                  document['nombres'],
+                                  style: styletextname,
                                 ),
                               ],
                             ),
-                          ),
-                          Column(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                color: color,
-                              ),
-                              Text(
-                                document['nombres'],
-                                style: styletextname,
-                              ),
-                            ],
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

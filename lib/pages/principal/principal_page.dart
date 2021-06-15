@@ -314,6 +314,7 @@ class Enddrawerlist extends StatelessWidget {
           trailing: Icon(Icons.queue_play_next_rounded),
           title: Text('Capacitaciones'),
           onTap: () {
+            _launchCapas();
             //_launchCapa();
             // Update the state of the app
             // ...

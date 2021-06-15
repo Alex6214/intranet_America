@@ -26,7 +26,7 @@ final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 final AuthService _authService = AuthService();
 
-bool _visibility = false;
+bool _visibility = true;
 
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   final Stream<QuerySnapshot> _eventStream =
@@ -78,6 +78,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
             }
 
             return new ListView(
+              reverse: false,
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -96,6 +97,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                             child: Row(
                               children: [
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
                                       Icons.title,
@@ -109,6 +111,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                                 ),
                                 Spacer(),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Icon(
                                       Icons.event_available,
@@ -138,22 +141,27 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                               ],
                             ),
                           ),
-                          GestureDetector(
-                              onTap: () async {
-                                final _urlLink = document['link'];
-                                if (await _urlLink == '') {
-                                  setState(() {
-                                    _visibility = !_visibility;
-                                  });
-                                } else if (await canLaunch(_urlLink)) {
-                                  await launch(_urlLink);
-                                } else {
-                                  throw 'Could not launch $_urlLink';
-                                }
-                              },
-                              child: Visibility(
-                                  visible: _visibility,
-                                  child: Icon(Icons.link)))
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              GestureDetector(
+                                  onTap: () async {
+                                    final _urlLink = document['link'];
+                                    if (await _urlLink == '') {
+                                      setState(() {
+                                        _visibility = !_visibility;
+                                      });
+                                    } else if (await canLaunch(_urlLink)) {
+                                      await launch(_urlLink);
+                                    } else {
+                                      throw 'Could not launch $_urlLink';
+                                    }
+                                  },
+                                  child: Visibility(
+                                      visible: _visibility,
+                                      child: Icon(Icons.link))),
+                            ],
+                          )
                         ],
                       ),
                     ),

@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intranet_americagit/pages/add/addFebrero.dart';
-import 'package:intranet_americagit/pages/add/addenero.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 
 class Febrero extends StatefulWidget {
@@ -76,15 +75,22 @@ class _FebreroState extends State<Febrero> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(document['sede']),
+                                Text(
+                                  document['sede'],
+                                  style: style,
+                                ),
                                 Spacer(),
-                                Text(document['fecha']),
+                                Text(
+                                  document['fecha'],
+                                  style: style,
+                                ),
+                                Spacer(),
+                                Text(
+                                  document['nombres'],
+                                  style: style,
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
                           ),
                         ],
                       ),

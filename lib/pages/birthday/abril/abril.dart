@@ -23,7 +23,7 @@ class _AbrilState extends State<Abril> {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
     final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 19);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -65,8 +65,11 @@ class _AbrilState extends State<Abril> {
                       width: size.width,
                       height: 200,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black26),
+                        borderRadius: BorderRadius.circular(30),
+                        gradient: LinearGradient(
+                          colors: [Colors.black38, Colors.white12],
+                        ),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -74,15 +77,22 @@ class _AbrilState extends State<Abril> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(document['sede']),
+                                Text(
+                                  document['sede'],
+                                  style: style,
+                                ),
                                 Spacer(),
-                                Text(document['fecha']),
+                                Text(
+                                  document['fecha'],
+                                  style: style,
+                                ),
+                                Spacer(),
+                                Text(
+                                  document['nombres'],
+                                  style: style,
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
                           ),
                         ],
                       ),

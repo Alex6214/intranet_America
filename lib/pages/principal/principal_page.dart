@@ -4,11 +4,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:intranet_americagit/logic/services_firebase.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/birthday/months.dart';
-import 'package:intranet_americagit/pages/testing/testread.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animate_do/animate_do.dart';
@@ -24,27 +23,28 @@ class PrincipalPageAmerica extends StatefulWidget {
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
+final AuthService _authService = AuthService();
 
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   final Stream<QuerySnapshot> _eventStream =
       FirebaseFirestore.instance.collection('events').snapshots();
   @override
   Widget build(BuildContext context) {
-    final List<String> pruebas = <String>[
-      'Prueba 1',
-      'Prueba 2',
-      'Prueba 3',
-      'Prueba 4',
-      'Prueba 5',
-      'Prueba 6',
-    ];
+    // final List<String> pruebas = <String>[
+    ///'Prueba 1',
+    //'Prueba 2',
+    // 'Prueba 3',
+    // 'Prueba 4',
+    // 'Prueba 5',
+    // 'Prueba 6',
+    //];
 
-    final tc = '3.85';
+    // final tc = '3.85';
 
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = GoogleFonts.poppins(
-        fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
+    //final style = GoogleFonts.poppins(
+    // fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
 
     return Scaffold(
       endDrawer: Drawer(
@@ -304,6 +304,7 @@ class Enddrawerlist extends StatelessWidget {
           leading: Icon(Icons.exit_to_app),
           title: Text('Cerrar Sesion'),
           onTap: () {
+            _authService.logout();
             // Update the state of the app
             // ...
 

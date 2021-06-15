@@ -13,7 +13,8 @@ class Agosto extends StatefulWidget {
 
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
-bool _showPassword = false;
+
+//bool _showPassword = false;
 
 class _AgostoState extends State<Agosto> {
   final Stream<QuerySnapshot> _eventStream =
@@ -23,7 +24,7 @@ class _AgostoState extends State<Agosto> {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
     final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+        color: Colors.black, fontWeight: FontWeight.bold, fontSize: 19);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -55,7 +56,7 @@ class _AgostoState extends State<Agosto> {
               return Center(child: CircularProgressIndicator());
             }
 
-            return new ListView(
+            return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -63,10 +64,13 @@ class _AgostoState extends State<Agosto> {
                     duration: Duration(seconds: 2),
                     child: Container(
                       width: size.width,
-                      height: 200,
+                      height: 100,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black26),
+                        borderRadius: BorderRadius.circular(30),
+                        gradient: LinearGradient(
+                          colors: [Colors.white10, Colors.white12],
+                        ),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -74,15 +78,46 @@ class _AgostoState extends State<Agosto> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(document['sede']),
+                                Column(
+                                  children: [
+                                    Icon(
+                                      Icons.person,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['nombres'],
+                                      style: style,
+                                    ),
+                                  ],
+                                ),
                                 Spacer(),
-                                Text(document['fecha']),
+                                Column(
+                                  children: [
+                                    Icon(
+                                      Icons.date_range_outlined,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['fecha'],
+                                      style: style,
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Column(
+                                  children: [
+                                    Icon(
+                                      Icons.local_convenience_store_rounded,
+                                      color: color,
+                                    ),
+                                    Text(
+                                      document['sede'],
+                                      style: style,
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
                           ),
                         ],
                       ),
@@ -96,7 +131,7 @@ class _AgostoState extends State<Agosto> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: color,
         elevation: 30,
-        child: Icon(Icons.add_box_outlined),
+        child: Icon(Icons.person_add),
         onPressed: () {
           _showAdmin(context);
         },

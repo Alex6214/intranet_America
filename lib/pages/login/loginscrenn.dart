@@ -7,7 +7,6 @@ import 'package:intranet_americagit/logic/services_firebase.dart';
 import 'package:intranet_americagit/pages/principal/principal_page.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/testing/testadd.dart';
-import 'package:intranet_americagit/pages/testing/testauth.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -43,8 +42,8 @@ class _LoginState extends State<Login> {
     final styletext = GoogleFonts.poppins(
         fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold);
 
-    final styleForm = GoogleFonts.poppins(
-        fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold);
+    // final styleForm = GoogleFonts.poppins(
+    //fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold);
     //final size = MediaQuery.of(context).size;
     // const color = const Color(0xff022d4f);
     return StreamBuilder<FirebaseAuth>(builder: (context, snapshot) {

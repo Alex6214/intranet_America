@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/add/addenero.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 
@@ -23,8 +24,8 @@ class _EneroState extends State<Enero> {
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    final style = GoogleFonts.poppins(
+        fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -64,7 +65,7 @@ class _EneroState extends State<Enero> {
                     duration: Duration(seconds: 2),
                     child: Container(
                       width: size.width,
-                      height: 200,
+                      height: 150,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.black26),
@@ -75,15 +76,22 @@ class _EneroState extends State<Enero> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(document['sede']),
+                                Text(
+                                  document['sede'],
+                                  style: style,
+                                ),
                                 Spacer(),
-                                Text(document['fecha']),
+                                Text(
+                                  document['fecha'],
+                                  style: style,
+                                ),
+                                Spacer(),
+                                Text(
+                                  document['nombres'],
+                                  style: style,
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
                           ),
                         ],
                       ),

@@ -74,15 +74,22 @@ class _SetiembreState extends State<Setiembre> {
                             padding: const EdgeInsets.only(right: 50, left: 50),
                             child: Row(
                               children: [
-                                Text(document['sede']),
+                                Text(
+                                  document['sede'],
+                                  style: style,
+                                ),
                                 Spacer(),
-                                Text(document['fecha']),
+                                Text(
+                                  document['fecha'],
+                                  style: style,
+                                ),
+                                Spacer(),
+                                Text(
+                                  document['nombres'],
+                                  style: style,
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
                           ),
                         ],
                       ),

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
+//Stream<FirebaseAuth> get user => auth.userChanges();
+
 class AuthService {
   //Create User
   Future<bool> createUserWithEmailAndPassword(

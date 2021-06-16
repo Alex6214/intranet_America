@@ -1,8 +1,10 @@
 // ignore: unused_import
 import 'dart:async';
+import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/logic/services_firebase.dart';
@@ -22,16 +24,25 @@ class PrincipalPageAmerica extends StatefulWidget {
   _PrincipalPageAmericaState createState() => _PrincipalPageAmericaState();
 }
 
+String error = '';
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 final AuthService _authService = AuthService();
+
+String tc = '3.85';
 
 bool _visibility = true;
 
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   final Stream<QuerySnapshot> _eventStream =
       FirebaseFirestore.instance.collection('events').snapshots();
+
+  CollectionReference tcweb = FirebaseFirestore.instance.collection('tc');
+
+  final Stream<QuerySnapshot> _tc =
+      FirebaseFirestore.instance.collection('tc').snapshots();
+
   @override
   Widget build(BuildContext context) {
     // final List<String> pruebas = <String>[
@@ -52,6 +63,10 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
     final styletextname = GoogleFonts.poppins(
         fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styletexttc = GoogleFonts.poppins(
+        fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.bold);
+
     //final style = GoogleFonts.poppins(
     // fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
 
@@ -67,111 +82,188 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
         backgroundColor: color,
         automaticallyImplyLeading: false,
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: _eventStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
-
-            return new ListView(
-              reverse: false,
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ZoomIn(
-                    child: Container(
-                      width: size.width,
-                      height: 250,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black26),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50, left: 50),
+      body: Stack(
+        children: [
+          StreamBuilder<QuerySnapshot>(
+              stream: _tc,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  return Text('Something went wrong');
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(child: CircularProgressIndicator());
+                }
+                return new ListView(
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Map<String, dynamic> data =
+                      document.data() as Map<String, dynamic>;
+                  return Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 7, left: 10),
+                        child: GestureDetector(
+                          onDoubleTap: () => _showTC(context),
+                          child: Container(
+                            height: 50,
+                            width: 90,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.title,
-                                      color: color,
-                                    ),
-                                    Text(
-                                      document['titulo'],
-                                      style: style,
-                                    ),
-                                  ],
-                                ),
-                                Spacer(),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.event_available,
-                                      color: color,
-                                    ),
-                                    Text(
-                                      document['fecha'],
-                                      style: style,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Column(
-                              children: [
-                                Icon(
-                                  Icons.text_snippet,
-                                  color: color,
+                                Text(
+                                  'TC: ',
+                                  style: styletexttc,
                                 ),
                                 Text(
-                                  document['contenido'],
-                                  style: styletextname,
+                                  document['tc'],
+                                  style: styletexttc,
                                 ),
                               ],
                             ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: color),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                  onTap: () async {
-                                    final _urlLink = document['link'];
-                                    if (await _urlLink == '') {
-                                      setState(() {
-                                        _visibility = !_visibility;
-                                      });
-                                    } else if (await canLaunch(_urlLink)) {
-                                      await launch(_urlLink);
-                                    } else {
-                                      throw 'Could not launch $_urlLink';
-                                    }
-                                  },
-                                  child: Visibility(
-                                      visible: _visibility,
-                                      child: Icon(Icons.link))),
-                            ],
-                          )
-                        ],
+                        ),
                       ),
-                    ),
-                  ),
-                );
-                //Text(document.data().toString());
-              }).toList(),
-            );
-          }),
+                    ],
+                  );
+                }).toList());
+
+                // Container(
+                //height: 50,
+                // width: 90,
+                // child: Row(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                //  children: [
+                //   Text(
+                //   'TC: $snapshot.tc',
+                //    style: styletexttc,
+                //   ),
+                //    ],
+                //  ),
+                // decoration: BoxDecoration(
+                ///     color: color,
+                //   borderRadius: BorderRadius.circular(30)),
+                //);
+              }),
+          Padding(
+            padding: const EdgeInsets.only(top: 55),
+            child: StreamBuilder<QuerySnapshot>(
+                stream: _eventStream,
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Text('Something went wrong');
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+
+                  return new ListView(
+                    reverse: false,
+                    children:
+                        snapshot.data!.docs.map((DocumentSnapshot document) {
+                      return Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: ZoomIn(
+                          child: Container(
+                            width: size.width,
+                            height: 250,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: Colors.black26),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 50, left: 50),
+                                  child: Row(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.title,
+                                            color: color,
+                                          ),
+                                          Text(
+                                            document['titulo'],
+                                            style: style,
+                                          ),
+                                        ],
+                                      ),
+                                      Spacer(),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.event_available,
+                                            color: color,
+                                          ),
+                                          Text(
+                                            document['fecha'],
+                                            style: style,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 30),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.text_snippet,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['contenido'],
+                                        style: styletextname,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    GestureDetector(
+                                        onTap: () async {
+                                          final _urlLink = document['link'];
+                                          if (await _urlLink == '') {
+                                            setState(() {
+                                              _visibility = !_visibility;
+                                            });
+                                          } else if (await canLaunch(
+                                              _urlLink)) {
+                                            await launch(_urlLink);
+                                          } else {
+                                            throw 'Could not launch $_urlLink';
+                                          }
+                                        },
+                                        child: Visibility(
+                                            visible: _visibility,
+                                            child: Icon(Icons.link))),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                      //Text(document.data().toString());
+                    }).toList(),
+                  );
+                }),
+          ),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: color,
         elevation: 30,
@@ -235,6 +327,58 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                           }
                         },
                         child: Text('Administrador'),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  void _showTC(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return BounceInDown(
+            duration: Duration(seconds: 2),
+            child: AlertDialog(
+              content: Container(
+                height: 130,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Ingrese Nuevo Tipo de Cambio'),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'Tipo de Cambio',
+                        ),
+                        obscureText: false,
+                        validator: (val) =>
+                            val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
+                        onChanged: (val) {
+                          setState(() => tc = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            return tcweb
+                                .doc('wgFEZpRC8fOuCiNqokSL')
+                                .update({'tc': tc})
+                                .then((value) => Navigator.pop(context))
+                                .catchError((error) => print("Error"));
+                          }
+
+                          // Si el formulario es válido, queremos mostrar un Snackbar
+                        },
+                        child: Text('Cambiar'),
                       )
                     ],
                   ),

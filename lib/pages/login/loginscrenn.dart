@@ -106,9 +106,12 @@ class _LoginState extends State<Login> {
                                               _showPassword = !_showPassword;
                                             });
                                           },
-                                          child: Icon(_showPassword
-                                              ? Icons.visibility
-                                              : Icons.visibility_off),
+                                          child: Icon(
+                                            _showPassword
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            color: color,
+                                          ),
                                         )),
                                     obscureText: !_showPassword,
                                     validator: (val) => val!.length < 6

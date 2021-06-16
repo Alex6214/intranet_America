@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:intranet_americagit/pages/login/loginscrenn.dart';
+import 'package:intranet_americagit/pages/principal/principal_page.dart';
 //import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 class SplashAmerica extends StatefulWidget {
@@ -25,6 +26,8 @@ class _SplashAmericaState extends State<SplashAmerica> {
         MaterialPageRoute(
           builder: (BuildContext context) {
             return Login();
+
+            //return PrincipalPageAmerica();
           },
         ),
       ),

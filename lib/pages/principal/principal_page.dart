@@ -9,6 +9,7 @@ import 'package:intranet_americagit/logic/services_firebase.dart';
 import 'package:intranet_americagit/pages/add/addEvent.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/birthday/months.dart';
+import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animate_do/animate_do.dart';
@@ -370,6 +371,11 @@ class Enddrawerlist extends StatelessWidget {
           leading: Icon(Icons.exit_to_app),
           title: Text('Cerrar Sesion'),
           onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Login(),
+                ));
             _authService.logout();
             // Update the state of the app
             // ...

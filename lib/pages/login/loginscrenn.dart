@@ -38,9 +38,11 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final styleTitule = GoogleFonts.poppins(
-        fontSize: 26.0, color: Colors.black, fontWeight: FontWeight.bold);
+        fontSize: 30.0, color: Colors.black, fontWeight: FontWeight.bold);
     final styletext = GoogleFonts.poppins(
-        fontSize: 16.0, color: Colors.black, fontWeight: FontWeight.bold);
+        fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
+
+    final color = Color(0xff022d4f);
 
     // final styleForm = GoogleFonts.poppins(
     //fontSize: 18.0, color: Colors.black, fontWeight: FontWeight.bold);
@@ -54,12 +56,18 @@ class _LoginState extends State<Login> {
                 child: FadeInLeft(
                   duration: Duration(seconds: 2),
                   child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/image/fondo.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 80, left: 20, right: 20),
+                              top: 80, left: 20, right: 20, bottom: 20),
                           child: SvgPicture.asset(
                             'assets/icon/login.svg',
                             height: 280,
@@ -77,6 +85,8 @@ class _LoginState extends State<Login> {
                                 children: [
                                   TextFormField(
                                     decoration: InputDecoration(
+                                        hintStyle:
+                                            TextStyle(color: Colors.black),
                                         hintText: 'Correo electronico'),
                                     validator: (val) => val!.isEmpty
                                         ? 'Ingresa un correo'
@@ -88,6 +98,8 @@ class _LoginState extends State<Login> {
                                   TextFormField(
                                     decoration: InputDecoration(
                                         hintText: 'Contraseña',
+                                        hintStyle:
+                                            TextStyle(color: Colors.black),
                                         suffixIcon: GestureDetector(
                                           onTap: () {
                                             setState(() {
@@ -110,8 +122,9 @@ class _LoginState extends State<Login> {
                               )),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 5),
+                          padding: const EdgeInsets.only(bottom: 155),
                           child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(primary: color),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 bool succes = await _authCredential
@@ -131,9 +144,12 @@ class _LoginState extends State<Login> {
                                 }
                               }
                             },
-                            child: Text(
-                              'Ingresar',
-                              style: styletext,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Ingresar',
+                                style: styletext,
+                              ),
                             ),
                           ),
                         ),

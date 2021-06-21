@@ -60,69 +60,38 @@ class _MayoristasState extends State<Mayoristas> {
                   padding: const EdgeInsets.all(20.0),
                   child: ZoomIn(
                     duration: Duration(seconds: 2),
-                    child: Container(
-                      width: size.width,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        gradient: LinearGradient(
-                          colors: [Colors.black38, Colors.white12],
-                        ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 50, left: 50),
-                              child: Row(
-                                children: [
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.date_range_outlined,
-                                        color: color,
-                                      ),
-                                      Text(
-                                        document['name'],
-                                        style: style,
-                                      ),
-                                    ],
-                                  ),
-                                  Spacer(),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.local_convenience_store_rounded,
-                                        color: color,
-                                      ),
-                                      Text(
-                                        document['meta'],
-                                        style: style,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Column(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 50, left: 50),
+                            child: Row(
                               children: [
-                                Icon(
-                                  Icons.person,
-                                  color: color,
-                                ),
                                 Text(
-                                  document['avance'],
+                                  document['name'],
+                                  style: styletextname,
+                                ),
+                                Spacer(),
+                                Text(
+                                  'S/  ${document['meta']}',
+                                  style: styletextname,
+                                ),
+                                Spacer(),
+                                Text(
+                                  'S/  ${document['avance']}',
+                                  style: styletextname,
+                                ),
+                                Spacer(),
+                                Text(
+                                  '${document['porcentaje']} %',
                                   style: styletextname,
                                 ),
                               ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

@@ -1,5 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -43,5 +43,17 @@ class AuthService {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  ///Actualizar el Tipo de cambio
+  ///
+  ///
+  Future<void> updateTC(String tc) {
+    CollectionReference tcweb = FirebaseFirestore.instance.collection('tc');
+    return tcweb
+        .doc('tc')
+        .update({'tc': tc})
+        .then((value) => print("User Updated"))
+        .catchError((error) => print("Error"));
   }
 }

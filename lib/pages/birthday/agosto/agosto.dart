@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/add/addAgosto.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 
@@ -13,17 +14,24 @@ class Agosto extends StatefulWidget {
 
 String codadmin = '';
 final _formKey = GlobalKey<FormState>();
-bool _showPassword = false;
+
+//bool _showPassword = false;
 
 class _AgostoState extends State<Agosto> {
-  final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('agosto').snapshots();
+  final Stream<QuerySnapshot> _eventStream = FirebaseFirestore.instance
+      .collection('agosto')
+      .orderBy('fecha', descending: true)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+
+    final style = GoogleFonts.poppins(
+        fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styletextname = GoogleFonts.poppins(
+        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -55,7 +63,7 @@ class _AgostoState extends State<Agosto> {
               return Center(child: CircularProgressIndicator());
             }
 
-            return new ListView(
+            return ListView(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -63,28 +71,67 @@ class _AgostoState extends State<Agosto> {
                     duration: Duration(seconds: 2),
                     child: Container(
                       width: size.width,
-                      height: 200,
+                      height: 150,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Colors.black26),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50, left: 50),
-                            child: Row(
+                        borderRadius: BorderRadius.circular(30),
+                        gradient: LinearGradient(
+                          colors: [Colors.black38, Colors.white12],
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 50, left: 50),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.date_range_outlined,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['fecha'],
+                                        style: style,
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.local_convenience_store_rounded,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['sede'],
+                                        style: style,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
                               children: [
-                                Text(document['sede']),
-                                Spacer(),
-                                Text(document['fecha']),
+                                Icon(
+                                  Icons.person,
+                                  color: color,
+                                ),
+                                Text(
+                                  document['nombres'],
+                                  style: styletextname,
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -96,7 +143,7 @@ class _AgostoState extends State<Agosto> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: color,
         elevation: 30,
-        child: Icon(Icons.add_box_outlined),
+        child: Icon(Icons.person_add),
         onPressed: () {
           _showAdmin(context);
         },

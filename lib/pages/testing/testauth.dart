@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 FirebaseAuth auth = FirebaseAuth.instance;
 

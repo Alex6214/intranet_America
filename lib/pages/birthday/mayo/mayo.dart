@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/add/addMayo.dart';
 import 'package:intranet_americagit/pages/birthday/months.dart';
 
@@ -16,15 +17,20 @@ final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 
 class _MayoState extends State<Mayo> {
-  final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('mayo').snapshots();
+  final Stream<QuerySnapshot> _eventStream = FirebaseFirestore.instance
+      .collection('mayo')
+      .orderBy('fecha', descending: true)
+      .snapshots();
   String codadmin = '';
   @override
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
-    final style = TextStyle(
-        color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
+    final style = GoogleFonts.poppins(
+        fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
+
+    final styletextname = GoogleFonts.poppins(
+        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold);
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
@@ -68,24 +74,60 @@ class _MayoState extends State<Mayo> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           color: Colors.black26),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50, left: 50),
-                            child: Row(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 50, left: 50),
+                              child: Row(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.date_range_outlined,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['fecha'],
+                                        style: style,
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.local_convenience_store_rounded,
+                                        color: color,
+                                      ),
+                                      Text(
+                                        document['sede'],
+                                        style: style,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Column(
                               children: [
-                                Text(document['sede']),
-                                Spacer(),
-                                Text(document['fecha']),
+                                Icon(
+                                  Icons.person,
+                                  color: color,
+                                ),
+                                Text(
+                                  document['nombres'],
+                                  style: styletextname,
+                                ),
                               ],
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 30),
-                            child: Text(document['nombres']),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),

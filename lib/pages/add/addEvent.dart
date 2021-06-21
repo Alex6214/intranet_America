@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:intranet_americagit/pages/principal/principal_page.dart';
 
 class AddEvent extends StatefulWidget {
   final String fecha;
@@ -16,6 +15,7 @@ class _AddEventState extends State<AddEvent> {
   final myControllerfecha = TextEditingController();
   final myControllertitulo = TextEditingController();
   final myControllercontenido = TextEditingController();
+  final myControllerlink = TextEditingController();
 
   @override
   void dispose() {
@@ -24,6 +24,7 @@ class _AddEventState extends State<AddEvent> {
     myControllerfecha.dispose();
     myControllertitulo.dispose();
     myControllercontenido.dispose();
+    myControllerlink.dispose();
     super.dispose();
   }
 
@@ -35,6 +36,7 @@ class _AddEventState extends State<AddEvent> {
         'fecha': myControllerfecha.text,
         'titulo': myControllertitulo.text,
         'contenido': myControllercontenido.text,
+        'link': myControllerlink.text
       }).then((value) {
         Navigator.pop(context);
         print("Event Added");
@@ -95,6 +97,16 @@ class _AddEventState extends State<AddEvent> {
                         decoration: InputDecoration(
                           icon: Icon(Icons.dehaze_outlined),
                           labelText: 'Detalle de Evento',
+                        ),
+                      ),
+                      Divider(
+                        height: 30,
+                      ),
+                      TextField(
+                        controller: myControllerlink,
+                        decoration: InputDecoration(
+                          icon: Icon(Icons.dehaze_outlined),
+                          labelText: 'Link de Evento',
                         ),
                       ),
                       Divider(

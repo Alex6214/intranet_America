@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intranet_americagit/pages/birthday/abril/abril.dart';
 import 'package:intranet_americagit/pages/birthday/agosto/agosto.dart';
 import 'package:intranet_americagit/pages/birthday/diciembre/diciembre.dart';
@@ -27,6 +28,8 @@ class _MounthsState extends State<Mounths> {
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
+    final styletextname = GoogleFonts.poppins(
+        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold);
     // final style = TextStyle(
     // color: Colors.white, fontWeight: FontWeight.bold, fontSize: 19);
     return Scaffold(
@@ -73,7 +76,7 @@ class _MounthsState extends State<Mounths> {
                 duration: Duration(seconds: 2),
                 child: Container(
                   width: size.width,
-                  height: 330,
+                  height: 335,
                   child: ListView(
                     children: [
                       GestureDetector(
@@ -99,6 +102,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Enero',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -128,6 +132,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Febrero',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -157,6 +162,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Marzo',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -186,6 +192,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Abril',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -215,6 +222,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Mayo',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -244,6 +252,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Junio',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -273,6 +282,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Julio',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -302,6 +312,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Agosto',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -331,6 +342,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Setiembre',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -360,6 +372,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Octubre',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -389,6 +402,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Noviembre',
+                                style: styletextname,
                               ),
                             ],
                           ),
@@ -418,6 +432,7 @@ class _MounthsState extends State<Mounths> {
                             children: [
                               Text(
                                 'Diciembre',
+                                style: styletextname,
                               ),
                             ],
                           ),

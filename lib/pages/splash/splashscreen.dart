@@ -25,9 +25,9 @@ class _SplashAmericaState extends State<SplashAmerica> {
         context,
         MaterialPageRoute(
           builder: (BuildContext context) {
-            return Login();
+            //return Login();
 
-            //return PrincipalPageAmerica();
+            return PrincipalPageAmerica();
           },
         ),
       ),

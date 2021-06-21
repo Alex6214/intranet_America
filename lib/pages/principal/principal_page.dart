@@ -12,6 +12,7 @@ import 'package:intranet_americagit/pages/add/addEvent.dart';
 // ignore: unused_import
 import 'package:intranet_americagit/pages/birthday/months.dart';
 import 'package:intranet_americagit/pages/login/loginscrenn.dart';
+import 'package:intranet_americagit/pages/sales/sales_page.dart';
 //import 'package:intranet_americagit/pages/login/loginscrenn.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:animate_do/animate_do.dart';
@@ -47,17 +48,6 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
   @override
   Widget build(BuildContext context) {
-    // final List<String> pruebas = <String>[
-    ///'Prueba 1',
-    //'Prueba 2',
-    // 'Prueba 3',
-    // 'Prueba 4',
-    // 'Prueba 5',
-    // 'Prueba 6',
-    //];
-
-    // final tc = '3.85';
-
     final color = Color(0xff022d4f);
     final size = MediaQuery.of(context).size;
     final style = GoogleFonts.poppins(
@@ -68,9 +58,6 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
 
     final styletexttc = GoogleFonts.poppins(
         fontSize: 18.0, color: Colors.white, fontWeight: FontWeight.bold);
-
-    //final style = GoogleFonts.poppins(
-    // fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold);
 
     return Scaffold(
       endDrawer: Drawer(
@@ -144,7 +131,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Ventas Maderas America',
+                                  'Noticias de  Maderas America',
                                   style: styletexttc,
                                 ),
                               ],
@@ -155,23 +142,6 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                     ],
                   );
                 }).toList());
-
-                // Container(
-                //height: 50,
-                // width: 90,
-                // child: Row(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                //  children: [
-                //   Text(
-                //   'TC: $snapshot.tc',
-                //    style: styletexttc,
-                //   ),
-                //    ],
-                //  ),
-                // decoration: BoxDecoration(
-                ///     color: color,
-                //   borderRadius: BorderRadius.circular(30)),
-                //);
               }),
           Padding(
             padding: const EdgeInsets.only(top: 55),
@@ -504,6 +474,28 @@ class Enddrawerlist extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => Mounths()),
+            );
+            //_launchCapa();
+            // Update the state of the app
+            // ...
+            // Then close the drawer
+            //Navigator.pop(context);
+          },
+        ),
+        Divider(),
+        ListTile(
+          leading: SvgPicture.asset(
+            "assets/icon/ventas.svg",
+            height: 25,
+          ),
+          trailing: Icon(Icons.verified_rounded),
+          title: Text('Ventas'),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SalesPages(),
+              ),
             );
             //_launchCapa();
             // Update the state of the app

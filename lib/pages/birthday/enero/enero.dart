@@ -17,8 +17,10 @@ final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 
 class _EneroState extends State<Enero> {
-  final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('enero').snapshots();
+  final Stream<QuerySnapshot> _eventStream = FirebaseFirestore.instance
+      .collection('enero')
+      .orderBy('fecha', descending: true)
+      .snapshots();
 
   @override
   Widget build(BuildContext context) {

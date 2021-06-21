@@ -35,8 +35,10 @@ String tc = '3.85';
 bool _visibility = true;
 
 class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
-  final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('events').snapshots();
+  final Stream<QuerySnapshot> _eventStream = FirebaseFirestore.instance
+      .collection('events')
+      .orderBy('fecha', descending: true)
+      .snapshots();
 
   CollectionReference tcweb = FirebaseFirestore.instance.collection('tc');
 
@@ -127,6 +129,29 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                           ),
                         ),
                       ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 30, top: 7),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Container(
+                            height: 50,
+                            width: 350,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(30),
+                                color: color),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Ventas Maderas America',
+                                  style: styletexttc,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   );
                 }).toList());

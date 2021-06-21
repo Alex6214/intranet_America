@@ -17,8 +17,10 @@ final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 
 class _MarzoState extends State<Marzo> {
-  final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('marzo').snapshots();
+  final Stream<QuerySnapshot> _eventStream = FirebaseFirestore.instance
+      .collection('marzo')
+      .orderBy('fecha', descending: true)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);

@@ -17,8 +17,10 @@ final _formKey = GlobalKey<FormState>();
 bool _showPassword = false;
 
 class _MayoState extends State<Mayo> {
-  final Stream<QuerySnapshot> _eventStream =
-      FirebaseFirestore.instance.collection('mayo').snapshots();
+  final Stream<QuerySnapshot> _eventStream = FirebaseFirestore.instance
+      .collection('mayo')
+      .orderBy('fecha', descending: true)
+      .snapshots();
   String codadmin = '';
   @override
   Widget build(BuildContext context) {

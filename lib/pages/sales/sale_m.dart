@@ -17,89 +17,133 @@ class _MayoristasState extends State<Mayoristas> {
   @override
   Widget build(BuildContext context) {
     final color = Color(0xff022d4f);
-    final size = MediaQuery.of(context).size;
-    final style = GoogleFonts.poppins(
-        fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
+    //final size = MediaQuery.of(context).size;
+    // final style = GoogleFonts.poppins(
+    // fontSize: 14.0, color: Colors.black, fontWeight: FontWeight.bold);
 
     final styletextname = GoogleFonts.poppins(
-        fontSize: 20.0, color: Colors.black, fontWeight: FontWeight.bold);
-    return Scaffold(
-      appBar: AppBar(
-        title: Image.asset(
-          'assets/image/Logo.JPG',
-          height: 50,
-        ),
-        centerTitle: true,
-        backgroundColor: color,
-        automaticallyImplyLeading: false,
-        leading: GestureDetector(
-          child: Icon(Icons.reply_outlined),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SalesPages(),
-                ));
-          },
-        ),
-      ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: _mayStream,
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return Text('Something went wrong');
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
+        fontSize: 25.0, color: Colors.black, fontWeight: FontWeight.bold);
 
-            return new ListView(
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                return Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: ZoomIn(
-                    duration: Duration(seconds: 2),
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 50, left: 50),
-                            child: Row(
+    final styletexttabla =
+        GoogleFonts.roboto(fontSize: 20.0, color: Colors.black);
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Image.asset(
+            'assets/image/Logo.JPG',
+            height: 50,
+          ),
+          centerTitle: true,
+          backgroundColor: color,
+          automaticallyImplyLeading: false,
+          leading: GestureDetector(
+            child: Icon(Icons.reply_outlined),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SalesPages(),
+                  ));
+            },
+          ),
+        ),
+        body: ZoomIn(
+          duration: Duration(seconds: 3),
+          child: Stack(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Spacer(),
+                  Text(
+                    'Vendedor',
+                    style: styletextname,
+                  ),
+                  Spacer(),
+                  Text(
+                    'Meta     ',
+                    style: styletextname,
+                  ),
+                  Spacer(),
+                  Text(
+                    '   Avance',
+                    style: styletextname,
+                  ),
+                  Spacer(),
+                  Text(
+                    'Porcentaje',
+                    style: styletextname,
+                  ),
+                  Spacer(),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: _mayStream,
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      return new ListView(
+                        children: snapshot.data!.docs
+                            .map((DocumentSnapshot document) {
+                          final porcentaje = document['porcentaje'];
+
+                          Widget ond = Text('');
+
+                          if (porcentaje >= 100) {
+                            ond = Text(
+                              '${porcentaje.toString()} %',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.bold),
+                            );
+                          }
+                          if (porcentaje < 100) {
+                            ond = Text(
+                              '${porcentaje.toString()} %',
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30),
+                            );
+                          }
+
+                          return Container(
+                            decoration: BoxDecoration(border: Border()),
+                            child: Column(
                               children: [
-                                Text(
-                                  document['name'],
-                                  style: styletextname,
-                                ),
-                                Spacer(),
-                                Text(
-                                  'S/  ${document['meta']}',
-                                  style: styletextname,
-                                ),
-                                Spacer(),
-                                Text(
-                                  'S/  ${document['avance']}',
-                                  style: styletextname,
-                                ),
-                                Spacer(),
-                                Text(
-                                  '${document['porcentaje']} %',
-                                  style: styletextname,
+                                Divider(),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Spacer(),
+                                    Text(
+                                      ' ${document['name']}',
+                                      style: styletexttabla,
+                                    ),
+                                    Spacer(),
+                                    Text(' S/ ${document['meta']}',
+                                        style: styletexttabla),
+                                    Spacer(),
+                                    Text(' S/ ${document['avance']}',
+                                        style: styletexttabla),
+                                    Spacer(),
+                                    ond,
+                                    Spacer()
+                                  ],
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-                //Text(document.data().toString());
-              }).toList(),
-            );
-          }),
-    );
+                          );
+                          //Text(document.data().toString());
+                        }).toList(),
+                      );
+                    }),
+              ),
+            ],
+          ),
+        ));
   }
 }

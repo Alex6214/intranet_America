@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'dart:async';
-import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +85,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
                 return new ListView(
                     children:
                         snapshot.data!.docs.map((DocumentSnapshot document) {
+                  // ignore: unused_local_variable
                   Map<String, dynamic> data =
                       document.data() as Map<String, dynamic>;
                   return Row(
@@ -385,7 +385,7 @@ class _PrincipalPageAmericaState extends State<PrincipalPageAmerica> {
   }
 }
 
-class Enddrawerlist extends StatelessWidget {
+class Enddrawerlist extends StatefulWidget {
   const Enddrawerlist({
     Key? key,
     required this.size,
@@ -393,6 +393,11 @@ class Enddrawerlist extends StatelessWidget {
 
   final Size size;
 
+  @override
+  _EnddrawerlistState createState() => _EnddrawerlistState();
+}
+
+class _EnddrawerlistState extends State<Enddrawerlist> {
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -402,7 +407,7 @@ class Enddrawerlist extends StatelessWidget {
         DrawerHeader(
           child: SvgPicture.asset(
             "assets/icon/drawer.svg",
-            height: size.height * 0.30,
+            height: widget.size.height * 0.30,
           ),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -491,12 +496,7 @@ class Enddrawerlist extends StatelessWidget {
           trailing: Icon(Icons.verified_rounded),
           title: Text('Ventas'),
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SalesPages(),
-              ),
-            );
+            _showAdminVentas(context);
             //_launchCapa();
             // Update the state of the app
             // ...
@@ -506,7 +506,7 @@ class Enddrawerlist extends StatelessWidget {
         ),
 
         SizedBox(
-          height: size.height * 0.15,
+          height: widget.size.height * 0.15,
         ),
         Divider(),
         ListTile(
@@ -546,6 +546,68 @@ class Enddrawerlist extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _showAdminVentas(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return BounceInDown(
+            duration: Duration(seconds: 2),
+            child: AlertDialog(
+              content: Container(
+                height: 130,
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Ingrese Codigo Administrador'),
+                      TextFormField(
+                        decoration: InputDecoration(
+                            hintText: 'Codigo',
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _showPassword = !_showPassword;
+                                });
+                              },
+                              child: Icon(_showPassword
+                                  ? Icons.visibility
+                                  : Icons.visibility_off),
+                            )),
+                        obscureText: !_showPassword,
+                        validator: (val) =>
+                            val!.isEmpty ? 'Ingresa codigo Porfavor' : null,
+                        onChanged: (val) {
+                          setState(() => codadmin = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            // Si el formulario es válido, queremos mostrar un Snackbar
+                            if (codadmin == 'ventas2021') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SalesPages(),
+                                  ));
+                            }
+                          }
+                        },
+                        child: Text('Administrador'),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
   }
 }
 
